@@ -6,6 +6,10 @@
 
 using namespace std;
 using namespace chrono;
+// Bu fonksiyon dosyayı XOR ile şifreler.
+// input: girdi dosya adı
+// output: çıktı dosya adı
+// key: kullanıcı tarafından girilen anahtar
 
 // XOR Şifreleme Fonksiyonu
 void xorCipher(const string& inputFile, const string& outputFile, const string& key) {
@@ -104,4 +108,5 @@ int main() {
     } while (choice != 4);
 
     return 0;
+
 }
