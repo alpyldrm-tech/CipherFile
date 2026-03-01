@@ -61,7 +61,7 @@ void vigenereCipher(const string& inputFile, const string& outputFile, const str
         return;
     }
 
-    
+
     vector<char> buffer((istreambuf_iterator<char>(inFile)), istreambuf_iterator<char>());
     auto start = high_resolution_clock::now();
 
@@ -164,7 +164,10 @@ void processFile(bool isEncrypt) {
     cout << "Seciminiz: ";
     cin >> algoChoice;
 
-    if (algoChoice < 1 || algoChoice > 3) {
+    if (!(cin >> algoChoice) || algoChoice < 1 || algoChoice > 3) {
+        cin.clear();
+        cin.ignore(10000, '\n');
+
         cout << "Gecersiz algoritma secimi!\n";
         system("pause");
         return;
@@ -204,7 +207,10 @@ int main() {
     do {
         system("cls");
         showMenu();
-        cin >> choice;
+        if (!(cin >> choice)) {
+            cin.clear();
+            cin.ignore(10000, '\n');
+        }
 
         switch (choice) {
         case 1:
@@ -225,6 +231,7 @@ int main() {
             break;
         default:
             cout << "Gecersiz secim!\n";
+            system("pause");
         }
     } while (choice != 4);
 
