@@ -1,105 +1,75 @@
-# CipherFile – XOR Tabanlı Dosya Şifreleme Uygulaması
+# CipherFile – Çoklu Algoritma Tabanlı Dosya Şifreleme Uygulaması
 
-##  Proje Hakkında
+## Proje Hakkında
 
-CipherFile, C++ programlama dili kullanılarak geliştirilmiş konsol tabanlı bir dosya şifreleme ve çözme uygulamasıdır.  
-Bu proje kapsamında simetrik anahtarlı bir şifreleme yöntemi olan XOR (Exclusive OR) algoritması kullanılmıştır.
+CipherFile, C++ programlama dili kullanılarak geliştirilmiş konsol tabanlı bir dosya şifreleme ve çözme uygulamasıdır. 
+Bu proje kapsamında simetrik anahtarlı şifreleme yöntemleri olan Sezar, Vigenère ve XOR (Exclusive OR) algoritmaları kullanılmıştır. 
+Uygulama, hem metin hem de binary (.jpg, .pdf, .exe vb.) dosyaları byte seviyesinde işleyerek güvenli biçimde şifreleyebilmekte ve ilgili algoritma/anahtar kullanılarak tekrar çözebilmektedir.
 
-Uygulama, hem metin hem de binary dosyaları byte seviyesinde işleyerek güvenli biçimde şifreleyebilmekte ve aynı anahtar kullanılarak tekrar çözebilmektedir.
+## Projenin Amacı
 
----
+* Dosya giriş/çıkış (File I/O) işlemlerini ve `ios::binary` mantığını öğrenmek
+* Binary veri işleme ve byte seviyesinde şifreleme mantığını kavramak
+* Sezar, Vigenère ve XOR şifreleme algoritmalarını uygulamak
+* C++ dilinde modüler programlama ve güvenli arayüz (girdi doğrulama) pratiği yapmak
+* GitHub üzerinden sürüm kontrol sürecini (Branch, Pull Request) ve takım çalışmasını deneyimlemek
 
-##  Projenin Amacı
+## Kullanılan Teknolojiler
 
-- Dosya giriş/çıkış (File I/O) işlemlerini öğrenmek
-- Binary veri işleme mantığını kavramak
-- XOR şifreleme algoritmasını uygulamak
-- C++ dilinde modüler programlama pratiği yapmak
-- GitHub üzerinden sürüm kontrol sürecini deneyimlemek
+* C++ (Standart Kütüphaneler: `<iostream>`, `<fstream>`, `<vector>`, `<chrono>`)
+* Sezar, Vigenère ve XOR Algoritmaları
+* Git & GitHub
 
----
+## Şifreleme Algoritmaları Nedir?
 
-##  Kullanılan Teknolojiler
+Uygulama üç farklı şifreleme altyapısı sunar:
+* **Sezar Algoritması:** Dosyadaki her bir byte değerini, kullanıcının girdiği sayısal anahtar kadar ileri veya geri kaydırır.
+* **Vigenère Algoritması:** Kullanıcının girdiği metin tabanlı anahtarın harflerini döngüsel olarak kullanarak ardışık byte kaydırma işlemi yapar.
+* **XOR (Exclusive OR) Algoritması:** İki bit karşılaştırıldığında farklı ise 1, aynı ise 0 sonucu üreten mantıksal bir operatördür. İşlem tersinir özelliğe sahip olduğu için aynı anahtar kullanılarak hem şifreleme hem de çözme işlemi yapılabilir.
+  * Örnek (XOR):
+    A ⊕ B
+    0 ⊕ 0 = 0
+    0 ⊕ 1 = 1
+    1 ⊕ 0 = 1
+    1 ⊕ 1 = 0
 
-- C++
-- <fstream> kütüphanesi
-- vector<char> veri yapısı
-- XOR (Exclusive OR) algoritması
-- Git & GitHub
+## Program Özellikleri
 
----
+* 3 farklı algoritma ile dosya şifreleme ve çözme
+* Karakter dönüşümü bozulmalarına karşı tam binary dosya desteği
+* Sonsuz döngü (Input Buffer Crash) korumalı kullanıcı dostu konsol arayüzü
+* İşlem süresinin milisaniye (ms) cinsinden ölçülmesi
+* Dosya boyutu görüntüleme
 
-##  XOR Algoritması Nedir?
+## Örnek Kullanım
 
-XOR (Exclusive OR), iki bit karşılaştırıldığında farklı ise 1, aynı ise 0 sonucu üreten mantıksal bir operatördür.
+**Şifreleme:**
+Algoritma Seçimi: 2 (Vigenère)
+Input Dosya: test.txt
+Anahtar: gizli123
+Çıktı Dosya: encrypted.dat
 
-Örnek:
+**Çözme:**
+Algoritma Seçimi: 2 (Vigenère)
+Input Dosya: encrypted.dat
+Anahtar: gizli123
+Çıktı Dosya: decrypted.txt
 
-A ⊕ B
+## Güvenlik Notu
 
-0 ⊕ 0 = 0  
-0 ⊕ 1 = 1  
-1 ⊕ 0 = 1  
-1 ⊕ 1 = 0  
-
-XOR işlemi tersinir özelliğe sahiptir:
-
-P ⊕ K ⊕ K = P
-
-Bu nedenle aynı anahtar kullanılarak hem şifreleme hem de çözme işlemi yapılabilir.
-
----
-
-##  Program Özellikleri
-
-- Dosya şifreleme
-- Dosya çözme
-- Binary dosya desteği
-- Anahtarın döngüsel uygulanması
-- Basit ve kullanıcı dostu konsol arayüzü
-- Dosya boyutu görüntüleme
-
----
-
-
-##  Örnek Kullanım
-
-Şifreleme:
-
-Input Dosya: test.txt  
-Anahtar: abc123  
-Çıktı Dosya: encrypted.dat  
-
-Çözme:
-
-Input Dosya: encrypted.dat  
-Anahtar: abc123  
-Çıktı Dosya: decrypted.txt  
-
----
-
-
----
-
-##  Güvenlik Notu
-
-Bu proje eğitim amaçlıdır.  
-XOR algoritması modern kriptografik standartlara göre güvenli değildir.  
+Bu proje eğitim amaçlıdır.
+Kullanılan algoritmalar modern kriptografik standartlara göre güvenli değildir.
 Gerçek dünya uygulamalarında AES gibi gelişmiş algoritmalar tercih edilmektedir.
 
----
+## Geliştiriciler
 
-##  Geliştiriciler
+* Hüseyin Emre Yılmaz
+* Kerem Aziz Erdoğan
+* Mehmet Alp Yıldırım
 
-- Hüseyin Emre Yılmaz  
-- Kerem Aziz Erdoğan  
-- Mehmet Alp Yıldırım  
-
-BIL1203 – Mühendislikte Proje Yönetimi  
+BIL1203 – Mühendislikte Proje Yönetimi
 2025-2026
 
----
-
-##  Lisans
+## Lisans
 
 Bu proje akademik amaçlı geliştirilmiştir.
